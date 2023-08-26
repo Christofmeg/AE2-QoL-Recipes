@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ae2:white_glass_cable"
+    },
+    {
+      "item": "minecraft:white_wool"
+    }
+  ],
+  "result": {
+    "item": "ae2:white_covered_cable"
+  }
+}
