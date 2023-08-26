@@ -10,7 +10,7 @@
       "tag": "ae2:covered_dense_cable"
     },
     "D": {
-      "item": "minecraft:water_bucket"
+      "tag": "forge:buckets/water"
     }
   },
   "result": {
