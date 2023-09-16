@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "c:gray_dyes"
+    },
+    {
+      "tag": "ae2:glass_cable"
+    }
+  ],
+  "result": {
+    "item": "ae2:gray_glass_cable"
+  }
+}
