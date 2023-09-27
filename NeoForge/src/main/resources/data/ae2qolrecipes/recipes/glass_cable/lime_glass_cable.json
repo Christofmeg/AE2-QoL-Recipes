@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:dyes/lime"
+    },
+    {
+      "tag": "ae2:glass_cable"
+    }
+  ],
+  "result": {
+    "item": "ae2:lime_glass_cable"
+  }
+}

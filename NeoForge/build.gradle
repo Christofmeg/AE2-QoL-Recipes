@@ -1,0 +1,88 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle' version '[6.0.13,6.2)'
+}
+
+archivesBaseName = "${mod_id}-neoforge-${neo_supported_versions}"
+
+minecraft {
+    mappings channel: 'official', version: neo_minecraft_version
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+            taskName 'Client'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                modClientRun {
+                    source sourceSets.main
+                    source project(":Common").sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            ideaModule "${rootProject.name}.${project.name}.main"
+            taskName 'Server'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                modServerRun {
+                    source sourceSets.main
+                    source project(":Common").sourceSets.main
+                }
+            }
+        }
+
+    }
+}
+
+dependencies {
+    minecraft "net.neoforged:forge:${neo_minecraft_version}-${neoforge_version}"
+    compileOnly project(":Common")
+
+    // JEI
+    if (project.hasProperty('jei_version')) {
+        compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
+        compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
+        runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
+    }
+    // CONFIGURED
+    if (project.hasProperty('configured_version')) {
+        implementation fg.deobf("curse.maven:configured-457570:${configured_version}")
+    }
+    // CATALOGUE
+    if (project.hasProperty('catalogue_version')) {
+        implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_version}")
+    }
+
+    implementation fg.deobf("curse.maven:applied-energistics-2-223794:4735461") // https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files
+
+}
+
+processResources {
+    from project(":Common").sourceSets.main.resources
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file://" + System.getenv("local_maven")
+        }
+    }
+}
