@@ -1,7 +1,10 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
 plugins {
     id 'fabric-loom' version '1.0-SNAPSHOT'
     id 'maven-publish'
     id 'idea'
+    id 'net.darkhax.curseforgegradle' version '1.+'
 }
 
 archivesBaseName = "${mod_id}-fabric-${fabric_supported_versions}"
@@ -79,4 +82,19 @@ publishing {
             url "file://" + System.getenv("local_maven")
         }
     }
+}
+
+tasks.register('publishCurseForge', TaskPublishCurseForge) {
+    apiToken = file('../../API Tokens/ae2qolrecipes.md')
+    def projectId = "${cf_id}".toString()
+    def mainFile = upload(projectId, file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
+    mainFile.changelogType = 'markdown'
+    mainFile.changelog = file('changelog.md')
+    mainFile.releaseType = "${release_type}"
+    "${fabric_release_versions}".split(',').each {
+        mainFile.addGameVersion("${it}")
+    }
+    mainFile.addRequirement("fabric-api")
+    mainFile.addRequirement("applied-energistics-2")
+    mainFile.addOptional("catalogue-fabric")
 }
