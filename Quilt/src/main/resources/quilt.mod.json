@@ -3,12 +3,10 @@
     "quilt_loader": {
         "group": "com.github.lafen99",
         "id": "ae2qolrecipes",
-        "provides": [],
         "version": "1.1.0",
+        "intermediate_mappings": "net.fabricmc:intermediary",
         "entrypoints": {
-            "main": [
-                "com.github.lafen99.AE2QoLRecipes"
-            ]
+          "init": "com.github.lafen99.AE2QoLRecipes"
         },
         "depends": [
             {
@@ -20,7 +18,6 @@
 				"version": "*"
 			}
         ],
-        "breaks": [],
         "metadata": {
             "name": "AE2 QoL Recipes",
             "description": "QoL Recipes for Applied Energistics",
@@ -33,16 +30,8 @@
 				"sources": "https://github.com/Lafen99/AE2-QoL-Recipes",
 				"issues": "https://github.com/Lafen99/AE2-QoL-Recipes/issues"
             },
-            "license": "The MIT License (MIT)",
+            "license": "MIT",
             "icon": "icon.png"
-        },
-		"custom": {
-			"catalogue": {
-			  "icon": {
-				"item": "ae2:fluix_glass_cable"
-			  }
-			}
-		}
-    },
-    "mixin": []
+        }
+    }
 }
