@@ -1,1 +1,1 @@
-Added 16 extra QoL recipes to Smart Dense Cables
+Remove unnecessary platform file
