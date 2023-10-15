@@ -1,11 +1,10 @@
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
-    id 'eclipse'
-    id 'idea'
-    id 'maven-publish'
     id 'net.neoforged.gradle' version '[6.0.13,6.2)'
+    id 'idea'
     id 'net.darkhax.curseforgegradle' version '1.+'
+    id 'com.modrinth.minotaur' version '2.+'
 }
 
 archivesBaseName = "${mod_id}-neoforge-${neo_supported_versions}"
@@ -74,22 +73,6 @@ processResources {
 
 jar.finalizedBy('reobfJar')
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.archivesBaseName
-            version project.version
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file://" + System.getenv("local_maven")
-        }
-    }
-}
-
 tasks.register('publishCurseForge', TaskPublishCurseForge) {
     apiToken = file('../../API Tokens/ae2qolrecipes.md')
     def projectId = "${cf_id}".toString()
@@ -103,4 +86,17 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
     }
     mainFile.addRequirement("applied-energistics-2")
     mainFile.addOptional("catalogue")
+}
+
+modrinth {
+    token = file('../../API Tokens/modrinth.md').text
+    projectId = "${modrinth_id}"
+    versionName = getArchivesBaseName() + "-" + getVersion()
+    versionType = "${release_type}"
+    changelog = file('changelog.md').text
+    uploadFile = file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar")
+    gameVersions = "${neoforge_release_versions}".split(",") as List<String>
+    dependencies {
+        required.project "ae2"
+    }
 }

@@ -2,9 +2,9 @@ import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
     id 'org.quiltmc.loom' version '1.1.+'
-    id 'maven-publish'
     id 'idea'
     id 'net.darkhax.curseforgegradle' version '1.+'
+    id 'com.modrinth.minotaur' version '2.+'
 }
 
 archivesBaseName = "${mod_id}-quilt-${quilt_supported_versions}"
@@ -80,23 +80,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId project.group
-            artifactId project.archivesBaseName
-            version project.version
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            url "file://" + System.getenv("local_maven")
-        }
-    }
-}
-
 tasks.register('publishCurseForge', TaskPublishCurseForge) {
     apiToken = file('../../API Tokens/ae2qolrecipes.md')
     def projectId = "${cf_id}".toString()
@@ -111,4 +94,18 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
     mainFile.addRequirement("qsl")
     mainFile.addRequirement("applied-energistics-2")
     mainFile.addOptional("catalogue-fabric")
+}
+
+modrinth {
+    token = file('../../API Tokens/modrinth.md').text
+    projectId = "${modrinth_id}"
+    versionName = getArchivesBaseName() + "-" + getVersion()
+    versionType = "${release_type}"
+    changelog = file('changelog.md').text
+    uploadFile = file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar")
+    gameVersions = "${quilt_release_versions}".split(",") as List<String>
+    dependencies {
+        required.project "qsl"
+        required.project "ae2"
+    }
 }
