@@ -50,9 +50,8 @@ dependencies {
 
     // JEI
     if (project.hasProperty('jei_version')) {
-        compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
-        compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
-        runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
+        compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api"))
+        runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}"))
     }
     // CONFIGURED
     if (project.hasProperty('configured_version')) {
@@ -63,7 +62,7 @@ dependencies {
         implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_version}")
     }
 
-    implementation fg.deobf("curse.maven:applied-energistics-2-223794:4647844") // https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files
+    implementation fg.deobf("curse.maven:applied-energistics-2-223794:3527063")// https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files
 
 }
 

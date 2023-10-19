@@ -23,5 +23,3 @@ pluginManagement {
 
 rootProject.name = 'AE2 QoL Recipes'
 include("Common", "Fabric", "Forge")
-include("Quilt")
-include("NeoForge")

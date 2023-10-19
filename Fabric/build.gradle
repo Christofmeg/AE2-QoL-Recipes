@@ -1,7 +1,7 @@
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
-    id 'fabric-loom' version '1.0-SNAPSHOT'
+    id 'fabric-loom' version '0.10-SNAPSHOT'
     id 'idea'
     id 'net.darkhax.curseforgegradle' version '1.+'
     id 'com.modrinth.minotaur' version '2.+'
@@ -17,13 +17,6 @@ dependencies {
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation project(":Common")
 
-    // JEI
-    if (project.hasProperty('jei_version')) {
-        modCompileOnly("mezz.jei:jei-${fabric_minecraft_version}-common-api:${jei_version}")
-        modCompileOnly("mezz.jei:jei-${fabric_minecraft_version}-fabric-api:${jei_version}")
-        modRuntimeOnly("mezz.jei:jei-${fabric_minecraft_version}-fabric:${jei_version}")
-    }
-
     // CONFIGURED
     if (project.hasProperty('fabric_configured_version')) {
         modImplementation "curse.maven:configured-fabric-667378:${fabric_configured_version}"
@@ -37,7 +30,11 @@ dependencies {
         }
     }
 
-//    modImplementation "curse.maven:applied-energistics-2-223794:4735349" // https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files
+    modImplementation "curse.maven:roughly-enough-items-310111:3652709"
+    modImplementation "curse.maven:architectury-api-419699:3807017"
+    modImplementation "curse.maven:cloth-config-348521:3782781"
+
+    modImplementation "curse.maven:applied-energistics-2-223794:3520658" // https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files
 
 }
 

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[38,)"
+loaderVersion="[37,)"
 issueTrackerURL="https://github.com/Lafen99/AE2-QoL-Recipes/issues"
 license="The MIT License (MIT)"
 [[mods]]
@@ -13,13 +13,13 @@ description="QoL Recipes for Applied Energistics"
 [[dependencies.ae2qolrecipes]]
     modId="forge"
     mandatory=true
-    versionRange="[38,)"
+    versionRange="[37,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.ae2qolrecipes]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,)"
+    versionRange="[1.17.1,)"
     ordering="NONE"
     side="BOTH"
 [modproperties.ae2qolrecipes]
