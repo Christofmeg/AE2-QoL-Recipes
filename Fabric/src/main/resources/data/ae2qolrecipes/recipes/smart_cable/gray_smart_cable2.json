@@ -10,11 +10,11 @@
       "tag": "c:gray_dyes"
     },
     "C": {
-      "tag": "ae2:smart_cable"
+      "tag": "appliedenergistics2:smart_cable"
     }
   },
   "result": {
-    "item": "ae2:gray_smart_cable",
+    "item": "appliedenergistics2:gray_smart_cable",
     "count": 8
   }
 }

@@ -6,10 +6,10 @@
   ],
   "key": {
     "C": {
-      "item": "ae2:gray_covered_cable"
+      "item": "appliedenergistics2:gray_covered_cable"
     }
   },
   "result": {
-    "item": "ae2:gray_covered_dense_cable"
+    "item": "appliedenergistics2:gray_covered_dense_cable"
   }
 }

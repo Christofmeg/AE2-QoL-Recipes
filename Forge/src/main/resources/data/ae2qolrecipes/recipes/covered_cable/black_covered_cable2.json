@@ -10,11 +10,11 @@
       "tag": "forge:dyes/black"
     },
     "C": {
-      "tag": "ae2:covered_cable"
+      "tag": "appliedenergistics2:covered_cable"
     }
   },
   "result": {
-    "item": "ae2:black_covered_cable",
+    "item": "appliedenergistics2:black_covered_cable",
     "count": 8
   }
 }

@@ -5,10 +5,10 @@
       "tag": "forge:dyes/pink"
     },
     {
-      "tag": "ae2:smart_cable"
+      "tag": "appliedenergistics2:smart_cable"
     }
   ],
   "result": {
-    "item": "ae2:pink_smart_cable"
+    "item": "appliedenergistics2:pink_smart_cable"
   }
 }

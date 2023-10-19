@@ -10,11 +10,11 @@
       "tag": "c:brown_dyes"
     },
     "C": {
-      "tag": "ae2:covered_dense_cable"
+      "tag": "appliedenergistics2:covered_dense_cable"
     }
   },
   "result": {
-    "item": "ae2:brown_covered_dense_cable",
+    "item": "appliedenergistics2:brown_covered_dense_cable",
     "count": 8
   }
 }

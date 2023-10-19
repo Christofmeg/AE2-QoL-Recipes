@@ -10,11 +10,11 @@
       "tag": "forge:dyes/green"
     },
     "C": {
-      "tag": "ae2:smart_cable"
+      "tag": "appliedenergistics2:smart_cable"
     }
   },
   "result": {
-    "item": "ae2:green_smart_cable",
+    "item": "appliedenergistics2:green_smart_cable",
     "count": 8
   }
 }

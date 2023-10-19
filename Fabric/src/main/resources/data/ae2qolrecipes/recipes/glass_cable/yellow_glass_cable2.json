@@ -10,11 +10,11 @@
       "tag": "c:yellow_dyes"
     },
     "C": {
-      "tag": "ae2:glass_cable"
+      "tag": "appliedenergistics2:glass_cable"
     }
   },
   "result": {
-    "item": "ae2:yellow_glass_cable",
+    "item": "appliedenergistics2:yellow_glass_cable",
     "count": 8
   }
 }

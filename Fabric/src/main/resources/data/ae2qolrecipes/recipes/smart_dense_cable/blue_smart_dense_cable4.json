@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "ae2:blue_covered_dense_cable"
+      "item": "appliedenergistics2:blue_covered_dense_cable"
     },
     {
       "tag": "c:redstone_dusts"
@@ -12,6 +12,6 @@
     }
   ],
   "result": {
-    "item": "ae2:blue_smart_dense_cable"
+    "item": "appliedenergistics2:blue_smart_dense_cable"
   }
 }

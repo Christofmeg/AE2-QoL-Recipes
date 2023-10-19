@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "ae2:light_gray_glass_cable"
+      "item": "appliedenergistics2:light_gray_glass_cable"
     },
     {
       "item": "minecraft:light_gray_wool"
     }
   ],
   "result": {
-    "item": "ae2:light_gray_covered_cable"
+    "item": "appliedenergistics2:light_gray_covered_cable"
   }
 }

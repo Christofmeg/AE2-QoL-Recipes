@@ -5,10 +5,10 @@
       "tag": "c:yellow_dyes"
     },
     {
-      "tag": "ae2:covered_cable"
+      "tag": "appliedenergistics2:covered_cable"
     }
   ],
   "result": {
-    "item": "ae2:yellow_covered_cable"
+    "item": "appliedenergistics2:yellow_covered_cable"
   }
 }

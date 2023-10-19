@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "ae2:covered_dense_cable"
+      "tag": "appliedenergistics2:covered_dense_cable"
     },
     {
       "tag": "forge:dyes/lime"
     }
   ],
   "result": {
-    "item": "ae2:lime_covered_dense_cable"
+    "item": "appliedenergistics2:lime_covered_dense_cable"
   }
 }

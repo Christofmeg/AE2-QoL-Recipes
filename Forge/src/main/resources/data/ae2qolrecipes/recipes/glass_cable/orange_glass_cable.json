@@ -5,10 +5,10 @@
       "tag": "forge:dyes/orange"
     },
     {
-      "tag": "ae2:glass_cable"
+      "tag": "appliedenergistics2:glass_cable"
     }
   ],
   "result": {
-    "item": "ae2:orange_glass_cable"
+    "item": "appliedenergistics2:orange_glass_cable"
   }
 }

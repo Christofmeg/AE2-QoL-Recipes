@@ -5,10 +5,10 @@
       "tag": "c:gray_dyes"
     },
     {
-      "tag": "ae2:glass_cable"
+      "tag": "appliedenergistics2:glass_cable"
     }
   ],
   "result": {
-    "item": "ae2:gray_glass_cable"
+    "item": "appliedenergistics2:gray_glass_cable"
   }
 }

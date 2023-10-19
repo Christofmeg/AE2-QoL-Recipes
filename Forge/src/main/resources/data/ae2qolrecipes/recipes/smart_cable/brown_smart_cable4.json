@@ -5,10 +5,10 @@
       "tag": "forge:dyes/brown"
     },
     {
-      "tag": "ae2:smart_cable"
+      "tag": "appliedenergistics2:smart_cable"
     }
   ],
   "result": {
-    "item": "ae2:brown_smart_cable"
+    "item": "appliedenergistics2:brown_smart_cable"
   }
 }

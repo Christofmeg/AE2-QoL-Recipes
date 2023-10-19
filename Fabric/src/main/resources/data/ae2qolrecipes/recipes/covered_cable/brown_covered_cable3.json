@@ -5,10 +5,10 @@
       "tag": "c:brown_dyes"
     },
     {
-      "tag": "ae2:covered_cable"
+      "tag": "appliedenergistics2:covered_cable"
     }
   ],
   "result": {
-    "item": "ae2:brown_covered_cable"
+    "item": "appliedenergistics2:brown_covered_cable"
   }
 }

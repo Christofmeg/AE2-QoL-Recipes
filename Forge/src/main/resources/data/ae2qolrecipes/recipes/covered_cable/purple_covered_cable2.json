@@ -10,11 +10,11 @@
       "tag": "forge:dyes/purple"
     },
     "C": {
-      "tag": "ae2:covered_cable"
+      "tag": "appliedenergistics2:covered_cable"
     }
   },
   "result": {
-    "item": "ae2:purple_covered_cable",
+    "item": "appliedenergistics2:purple_covered_cable",
     "count": 8
   }
 }

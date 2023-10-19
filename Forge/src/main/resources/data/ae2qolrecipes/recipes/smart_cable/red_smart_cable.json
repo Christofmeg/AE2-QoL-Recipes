@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "ae2:covered_cable"
+      "tag": "appliedenergistics2:covered_cable"
     },
     {
       "tag": "forge:dusts/redstone"
@@ -15,6 +15,6 @@
     }
   ],
   "result": {
-    "item": "ae2:red_smart_cable"
+    "item": "appliedenergistics2:red_smart_cable"
   }
 }

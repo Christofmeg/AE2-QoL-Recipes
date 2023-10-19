@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "ae2:fluix_glass_cable"
+      "item": "appliedenergistics2:fluix_glass_cable"
     },
     {
       "tag": "c:redstone_dusts"
@@ -15,6 +15,6 @@
     }
   ],
   "result": {
-    "item": "ae2:white_smart_cable"
+    "item": "appliedenergistics2:white_smart_cable"
   }
 }

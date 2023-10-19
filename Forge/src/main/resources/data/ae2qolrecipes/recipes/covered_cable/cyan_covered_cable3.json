@@ -5,10 +5,10 @@
       "tag": "forge:dyes/cyan"
     },
     {
-      "tag": "ae2:covered_cable"
+      "tag": "appliedenergistics2:covered_cable"
     }
   ],
   "result": {
-    "item": "ae2:cyan_covered_cable"
+    "item": "appliedenergistics2:cyan_covered_cable"
   }
 }

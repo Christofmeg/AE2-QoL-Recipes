@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "ae2:lime_glass_cable"
+      "item": "appliedenergistics2:lime_glass_cable"
     },
     {
       "item": "minecraft:lime_wool"
     }
   ],
   "result": {
-    "item": "ae2:lime_covered_cable"
+    "item": "appliedenergistics2:lime_covered_cable"
   }
 }

@@ -5,10 +5,10 @@
       "tag": "forge:dyes/blue"
     },
     {
-      "tag": "ae2:covered_cable"
+      "tag": "appliedenergistics2:covered_cable"
     }
   ],
   "result": {
-    "item": "ae2:blue_covered_cable"
+    "item": "appliedenergistics2:blue_covered_cable"
   }
 }

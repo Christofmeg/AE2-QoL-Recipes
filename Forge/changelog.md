@@ -1,1 +1,1 @@
-Remove unnecessary platform file
+Backport to forge 1.17.1

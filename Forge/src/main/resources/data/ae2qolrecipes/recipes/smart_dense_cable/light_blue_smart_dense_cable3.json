@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "ae2:smart_dense_cable"
+      "tag": "appliedenergistics2:smart_dense_cable"
     },
     {
       "tag": "forge:dyes/light_blue"
     }
   ],
   "result": {
-    "item": "ae2:light_blue_smart_dense_cable"
+    "item": "appliedenergistics2:light_blue_smart_dense_cable"
   }
 }

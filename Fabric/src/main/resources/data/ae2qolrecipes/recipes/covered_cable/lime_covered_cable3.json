@@ -5,10 +5,10 @@
       "tag": "c:lime_dyes"
     },
     {
-      "tag": "ae2:covered_cable"
+      "tag": "appliedenergistics2:covered_cable"
     }
   ],
   "result": {
-    "item": "ae2:lime_covered_cable"
+    "item": "appliedenergistics2:lime_covered_cable"
   }
 }

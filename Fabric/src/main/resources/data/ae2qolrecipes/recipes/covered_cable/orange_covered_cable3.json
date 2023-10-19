@@ -5,10 +5,10 @@
       "tag": "c:orange_dyes"
     },
     {
-      "tag": "ae2:covered_cable"
+      "tag": "appliedenergistics2:covered_cable"
     }
   ],
   "result": {
-    "item": "ae2:orange_covered_cable"
+    "item": "appliedenergistics2:orange_covered_cable"
   }
 }

@@ -5,10 +5,10 @@
       "tag": "c:light_blue_dyes"
     },
     {
-      "tag": "ae2:glass_cable"
+      "tag": "appliedenergistics2:glass_cable"
     }
   ],
   "result": {
-    "item": "ae2:light_blue_glass_cable"
+    "item": "appliedenergistics2:light_blue_glass_cable"
   }
 }
