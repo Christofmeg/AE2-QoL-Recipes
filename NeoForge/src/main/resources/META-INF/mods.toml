@@ -1,26 +1,26 @@
 modLoader="javafml"
-loaderVersion="[38,)"
+loaderVersion="${loader_version_range}"
 issueTrackerURL="https://github.com/Christofmeg/AE2-QoL-Recipes/issues"
-license="The MIT License (MIT)"
+license="${mod_license}"
 [[mods]]
-modId="ae2qolrecipes"
-version="${file.jarVersion}"
-displayName="AE2 QoL Recipes"
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}" 
 displayURL="https://github.com/Christofmeg/AE2-QoL-Recipes"
 logoFile="icon.png"
-authors="Christofmeg, Lafen99"
-description="QoL Recipes for Applied Energistics"
-[[dependencies.ae2qolrecipes]]
-    modId="forge"
+authors="${mod_authors}"
+description='''${mod_description}'''
+[[dependencies.${mod_id}]]
+    modId="neoforge"
     mandatory=true
-    versionRange="[38,)"
+    versionRange="${neo_version_range}"
     ordering="NONE"
     side="BOTH"
-[[dependencies.ae2qolrecipes]]
+[[dependencies.${mod_id}]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,)"
+    versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
-[modproperties.ae2qolrecipes]
+[modproperties.${mod_id}]
     catalogueItemIcon="ae2:fluix_glass_cable"

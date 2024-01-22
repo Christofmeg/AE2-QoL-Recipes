@@ -1,77 +1,104 @@
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
-    id 'net.neoforged.gradle' version '[6.0.13,6.2)'
+    id 'java-library'
+    id 'eclipse'
     id 'idea'
+    id 'net.neoforged.gradle.userdev' version '7.0.57'
     id 'net.darkhax.curseforgegradle' version '1.+'
     id 'com.modrinth.minotaur' version '2.+'
 }
 
-archivesBaseName = "${mod_id}-neoforge-${neo_supported_versions}"
+version = mod_version
+group = mod_group_id
 
-minecraft {
-    mappings channel: 'official', version: neo_minecraft_version
+repositories {
+    mavenLocal()
+}
 
-    runs {
-        client {
-            workingDirectory project.file('run')
-            ideaModule "${rootProject.name}.${project.name}.main"
-            taskName 'Client'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            mods {
-                modClientRun {
-                    source sourceSets.main
-                    source project(":Common").sourceSets.main
-                }
-            }
-        }
+base {
+    archivesBaseName = "${mod_id}-neoforge-${supported_versions}"
+}
 
-        server {
-            workingDirectory project.file('run')
-            ideaModule "${rootProject.name}.${project.name}.main"
-            taskName 'Server'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            mods {
-                modServerRun {
-                    source sourceSets.main
-                    source project(":Common").sourceSets.main
-                }
-            }
-        }
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+runs {
+
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+
+        modSource project.sourceSets.main
+    }
+
+    client {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    server {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+        programArgument '--nogui'
+    }
+
+    gameTestServer {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    data {
+        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
     }
 }
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
 
 dependencies {
-    minecraft "net.neoforged:forge:${neo_minecraft_version}-${neoforge_version}"
-    compileOnly project(":Common")
+    implementation "net.neoforged:neoforge:${neo_version}"
 
-    // JEI
-    if (project.hasProperty('jei_version')) {
-        compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
-        compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
-        runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
-    }
-    // CONFIGURED
-    if (project.hasProperty('configured_version')) {
-        implementation fg.deobf("curse.maven:configured-457570:${configured_version}")
-    }
-    // CATALOGUE
-    if (project.hasProperty('catalogue_version')) {
-        implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_version}")
-    }
+    implementation "maven.modrinth:cloth-config:6GeyuE7Y"
+    implementation "maven.modrinth:architectury-api:BcFTKnjw"
+    implementation "maven.modrinth:rei:HaXjvArr"
 
-    implementation fg.deobf("curse.maven:applied-energistics-2-223794:4735461") // https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files
+    implementation "maven.modrinth:ae2:Cf5vGMwV" // https://modrinth.com/mod/ae2/versions
 
 }
 
-processResources {
-    from project(":Common").sourceSets.main.resources
+repositories {
+    maven {
+        url "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
-jar.finalizedBy('reobfJar')
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            file: 'META-INF/mods.toml',
+            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+            neo_version: neo_version, neo_version_range: neo_version_range,
+            loader_version_range: loader_version_range,
+            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors: mod_authors, mod_description: mod_description
+    ]
+
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
 
 tasks.register('publishCurseForge', TaskPublishCurseForge) {
     apiToken = file('../../API Tokens/ae2qolrecipes.md')

@@ -24,8 +24,3 @@ plugins {
 }
 
 rootProject.name = 'AE2 QoL Recipes'
-//include("Common")
-//include("Fabric")
-//include("Forge")
-//include("Quilt")
-//include("NeoForge")

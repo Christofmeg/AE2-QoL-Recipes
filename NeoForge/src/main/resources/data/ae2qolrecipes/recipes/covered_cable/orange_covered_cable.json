@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ae2:orange_glass_cable"
+    },
+    {
+      "item": "minecraft:orange_wool"
+    }
+  ],
+  "result": {
+    "item": "ae2:orange_covered_cable"
+  }
+}
