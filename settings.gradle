@@ -33,4 +33,4 @@ plugins {
 }
 
 rootProject.name = 'AE2 QoL Recipes'
-include("Common", "NeoForge")
+include("common", "neoforge")
