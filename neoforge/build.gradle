@@ -2,7 +2,7 @@ import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
     id 'multiloader-loader'
-    id 'net.neoforged.gradle.userdev' version '7.0.142'
+    id 'net.neoforged.moddev'
     id 'net.darkhax.curseforgegradle' version '1.+'
     id 'com.modrinth.minotaur' version '2.+'
 }
@@ -11,29 +11,36 @@ base {
     archivesName = "${mod_id}-${project.name}-${neoforge_supported_versions}"
 }
 
-runs {
-    configureEach {
-        modSource project.sourceSets.main
-    }
-    client {
-        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-    }
-    server {
-        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
-    }
-}
+neoForge {
+    version = neoforge_version
 
-subsystems {
     parchment {
-        minecraftVersion = "${parchment_mc}"
-        mappingsVersion = "${parchment_version}"
+        minecraftVersion = parchment_mc
+        mappingsVersion = parchment_version
+    }
+    runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+        }
+        client {
+            client()
+        }
+        data {
+            data()
+        }
+        server {
+            server()
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
     }
 }
 
 dependencies {
-    implementation "net.neoforged:neoforge:${neoforge_version}"
-
     // JEI
     if (project.hasProperty('jei_version')) {
         if (project.hasProperty('enable_jei') && project.enable_jei.toBoolean()) {
@@ -46,7 +53,8 @@ dependencies {
         implementation "curse.maven:catalogue-459701:${catalogue_version}"
     }
 	
-	implementation "maven.modrinth:ae2:BXufDcIQ" // https://modrinth.com/mod/ae2/versions
+	implementation "maven.modrinth:ae2:FsBnZLCO" // https://modrinth.com/mod/ae2/versions
+    implementation "maven.modrinth:guideme:EYCR81MC" // https://modrinth.com/mod/guideme/versions
 
 }
 
