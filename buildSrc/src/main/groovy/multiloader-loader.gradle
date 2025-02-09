@@ -29,4 +29,5 @@ tasks.named('compileJava', JavaCompile) {
 processResources {
     dependsOn(configurations.commonResources)
     from(configurations.commonResources)
+    exclude '.cache'
 }
