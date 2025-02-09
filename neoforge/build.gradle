@@ -19,7 +19,7 @@ runs {
         systemProperty 'forge.logging.markers', 'REGISTRIES'
         systemProperty 'forge.logging.console.level', 'debug'
         modSource project.sourceSets.main
-        modSource project(":Common").sourceSets.main
+        modSource project(":common").sourceSets.main
     }
 
     client {
@@ -42,7 +42,7 @@ runs {
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-	compileOnly project(":Common")
+	compileOnly project(":common")
 
 //    implementation "maven.modrinth:cloth-config:6GeyuE7Y"
 //    implementation "maven.modrinth:architectury-api:BcFTKnjw"
@@ -52,11 +52,11 @@ dependencies {
 }
 
 tasks.named('compileJava', JavaCompile).configure {
-    source(project(":Common").sourceSets.main.allSource)
+    source(project(":common").sourceSets.main.allSource)
 }
 
 processResources {
-    from project(":Common").sourceSets.main.resources
+    from project(":common").sourceSets.main.resources
 }
 
 tasks.withType(ProcessResources).configureEach {
