@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "ae2:yellow_smart_dense_cable"
+    }
+  ],
+  "result": {
+    "id": "ae2:yellow_smart_cable",
+    "count": 4
+  }
+}

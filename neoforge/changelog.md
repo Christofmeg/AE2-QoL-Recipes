@@ -1,1 +1,1 @@
-Update version range to 1.21.1
+Added 34 more recipes to convert Dense Covered Cables and Smart Dense Cables back to Covered Cables and Smart Cables
