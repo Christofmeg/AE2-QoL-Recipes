@@ -1,94 +1,73 @@
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
-    id 'java-library'
-    id 'eclipse'
-    id 'idea'
-    id 'net.neoforged.gradle.userdev' version '7.0.105'
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev'
     id 'net.darkhax.curseforgegradle' version '1.+'
     id 'com.modrinth.minotaur' version '2.+'
 }
 
 base {
-    archivesBaseName = "${mod_id}-neoforge-${neo_supported_versions}"
+    archivesName = "${mod_id}-${project.name}-${neoforge_supported_versions}"
 }
 
-runs {
+neoForge {
+    version = neoforge_version
 
-    configureEach {
-        systemProperty 'forge.logging.markers', 'REGISTRIES'
-        systemProperty 'forge.logging.console.level', 'debug'
-        modSource project.sourceSets.main
-        modSource project(":common").sourceSets.main
+    parchment {
+        minecraftVersion = parchment_mc
+        mappingsVersion = parchment_version
     }
-
-    client {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+        }
+        client {
+            client()
+        }
+        data {
+            data()
+        }
+        server {
+            server()
+        }
     }
-
-    server {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
-    }
-
-    gameTestServer {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-    }
-
-    data {
-        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
     }
 }
 
 dependencies {
-    implementation "net.neoforged:neoforge:${neo_version}"
-	compileOnly project(":common")
-
-//    implementation "maven.modrinth:cloth-config:6GeyuE7Y"
-//    implementation "maven.modrinth:architectury-api:BcFTKnjw"
-//    implementation "maven.modrinth:rei:HaXjvArr"
-
-    implementation "maven.modrinth:ae2:pGnl32B8" // https://modrinth.com/mod/ae2/versions
-}
-
-tasks.named('compileJava', JavaCompile).configure {
-    source(project(":common").sourceSets.main.allSource)
-}
-
-processResources {
-    from project(":common").sourceSets.main.resources
-}
-
-tasks.withType(ProcessResources).configureEach {
-    var replaceProperties = [
-            file: 'META-INF/neoforge.mods.toml',
-            minecraft_version: minecraft_version, 
-			minecraft_version_range: minecraft_version_range,
-            neo_version: neo_version, 
-			neo_version_range: neo_version_range,
-            loader_version_range: loader_version_range,
-            mod_id: mod_id, 
-			mod_name: mod_name, 
-			mod_license: mod_license, 
-			version: version,
-            mod_authors: mod_authors, 
-			mod_description: mod_description
-    ]
-
-    inputs.properties replaceProperties
-
-    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties
+    // JEI
+    if (project.hasProperty('jei_version')) {
+        if (project.hasProperty('enable_jei') && project.enable_jei.toBoolean()) {
+            runtimeOnly("mezz.jei:jei-${jei_minecraft_version}-neoforge:${jei_version}")
+        }
     }
+
+    // CATALOGUE
+    if (project.hasProperty('catalogue_version')) {
+        implementation "curse.maven:catalogue-459701:${catalogue_version}"
+    }
+
+    implementation "maven.modrinth:ae2:L3u3Zbmr" // https://modrinth.com/mod/ae2/versions
 }
 
 tasks.register('publishCurseForge', TaskPublishCurseForge) {
     apiToken = file('../../API Tokens/ae2qolrecipes.md')
     def projectId = "${cf_id}".toString()
     def mainFile = upload(projectId, file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
+
+    disableVersionDetection()
+    mainFile.addJavaVersion("Java " + "${java_version}")
+    mainFile.addModLoader("${project.name}")
+
     mainFile.changelogType = 'markdown'
     mainFile.changelog = file('changelog.md')
-    mainFile.addGameVersion('Client', 'Server')
+    mainFile.addGameVersion('Server')
     mainFile.releaseType = "${release_type}"
     "${neoforge_release_versions}".split(',').each {
         mainFile.addGameVersion("${it}")
@@ -105,15 +84,8 @@ modrinth {
     changelog = file('changelog.md').text
     uploadFile = file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar")
     gameVersions = "${neoforge_release_versions}".split(",") as List<String>
+    loaders = ["${project.name}"]
     dependencies {
         required.project "ae2"
-    }
-}
-
-
-idea {
-    module {
-        downloadSources = true
-        downloadJavadoc = true
     }
 }
