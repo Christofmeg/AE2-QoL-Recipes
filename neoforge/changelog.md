@@ -1,4 +1,1 @@
-### 1.2.0:
-* Fix to [#1](https://github.com/Christofmeg/AE2-QoL-Recipes/issues/1)
-* Made recipes more consistent
-* Port to 1.20.6
+Added 34 more recipes to convert Dense Covered Cables and Smart Dense Cables back to Covered Cables and Smart Cables

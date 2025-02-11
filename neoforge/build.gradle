@@ -78,13 +78,15 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
 
 modrinth {
     token = file('../../API Tokens/modrinth.md').text
-    projectId = "${modrinth_id}"
-    versionName = getArchivesBaseName() + "-" + getVersion()
-    versionType = "${release_type}"
+    projectId = modrinth_id
+    versionType = release_type
     changelog = file('changelog.md').text
-    uploadFile = file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar")
-    gameVersions = "${neoforge_release_versions}".split(",") as List<String>
-    loaders = ["${project.name}"]
+    gameVersions = neoforge_release_versions.split(",") as List<String>
+    loaders.add(project.name)
+    detectLoaders = false
+    versionName = "${archivesBaseName}-${version}"
+    uploadFile = layout.buildDirectory.file("libs/${archivesBaseName}-${version}.jar").get().asFile
+
     dependencies {
         required.project "ae2"
     }

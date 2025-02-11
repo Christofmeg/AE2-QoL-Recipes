@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "ae2:light_blue_covered_dense_cable"
+    }
+  ],
+  "result": {
+    "id": "ae2:light_blue_covered_cable",
+    "count": 4
+  }
+}
