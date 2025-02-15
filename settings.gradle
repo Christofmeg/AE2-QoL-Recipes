@@ -19,6 +19,17 @@ pluginManagement {
         }
         mavenCentral()
     }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.toString() == 'org.spongepowered.mixin') {
+                useModule("org.spongepowered:mixingradle:${requested.version}")
+            }
+        }
+    }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.9.0'
 }
 
 rootProject.name = 'AE2 QoL Recipes'

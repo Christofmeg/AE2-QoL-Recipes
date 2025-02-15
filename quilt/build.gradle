@@ -18,7 +18,7 @@ dependencies {
     }
     modImplementation "org.quiltmc.quilted-fabric-api:quilted-fabric-api:${quilt_version}"
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
-    implementation project(":Common")
+    implementation project(":common")
 
     // JEI
     if (project.hasProperty('jei_version')) {
@@ -63,7 +63,7 @@ loom {
 }
 
 processResources {
-    from project(":Common").sourceSets.main.resources
+    from project(":common").sourceSets.main.resources
     inputs.property "version", project.version
 
     filesMatching("quilt.mod.json") {

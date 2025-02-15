@@ -1,7 +1,7 @@
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
-    id 'net.neoforged.gradle' version '[6.0.13,6.2)'
+    id 'net.neoforged.moddev.legacyforge'
     id 'idea'
     id 'net.darkhax.curseforgegradle' version '1.+'
     id 'com.modrinth.minotaur' version '2.+'
@@ -9,67 +9,64 @@ plugins {
 
 archivesBaseName = "${mod_id}-neoforge-${neo_supported_versions}"
 
-minecraft {
-    mappings channel: 'official', version: neo_minecraft_version
+legacyForge {
+    version = minecraft_version + '-' + neoforge_version
 
+    parchment {
+        minecraftVersion = parchment_mc
+        mappingsVersion = parchment_version
+    }
     runs {
+        configureEach {
+
+            systemProperty 'mixin.env.remapRefMap', 'true'
+            systemProperty 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            systemProperty('forge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+        }
         client {
-            workingDirectory project.file('run')
-            ideaModule "${rootProject.name}.${project.name}.main"
-            taskName 'Client'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            mods {
-                modClientRun {
-                    source sourceSets.main
-                    source project(":Common").sourceSets.main
-                }
-            }
+            client()
         }
-
+        data {
+            data()
+        }
         server {
-            workingDirectory project.file('run')
-            ideaModule "${rootProject.name}.${project.name}.main"
-            taskName 'Server'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            mods {
-                modServerRun {
-                    source sourceSets.main
-                    source project(":Common").sourceSets.main
-                }
-            }
+            server()
         }
-
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
     }
 }
 
 dependencies {
-    minecraft "net.neoforged:forge:${neo_minecraft_version}-${neoforge_version}"
-    compileOnly project(":Common")
+    compileOnly project(":common")
 
     // JEI
     if (project.hasProperty('jei_version')) {
-        compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
-        compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
-        runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
+        compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+        compileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+        runtimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
     }
     // CONFIGURED
     if (project.hasProperty('configured_version')) {
-        implementation fg.deobf("curse.maven:configured-457570:${configured_version}")
+        implementation("curse.maven:configured-457570:${configured_version}")
     }
     // CATALOGUE
     if (project.hasProperty('catalogue_version')) {
-        implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_version}")
+        implementation("curse.maven:catalogue-459701:${catalogue_version}")
     }
 
-    implementation fg.deobf("curse.maven:applied-energistics-2-223794:4735461") // https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files
-    implementation fg.deobf("curse.maven:polymorph-388800:5222033")
+    runtimeOnly("curse.maven:applied-energistics-2-223794:6091401") // https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2/files
+    runtimeOnly("curse.maven:polymorph-388800:5995253") // https://www.curseforge.com/minecraft/mc-mods/polymorph/files
 
 }
 
 processResources {
-    from project(":Common").sourceSets.main.resources
+    from project(":common").sourceSets.main.resources
 }
 
 tasks.withType(ProcessResources).configureEach {
