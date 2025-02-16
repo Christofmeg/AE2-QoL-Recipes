@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "appliedenergistics2:pink_covered_dense_cable"
+    }
+  ],
+  "result": {
+    "item": "appliedenergistics2:pink_covered_cable",
+    "count": 4
+  }
+}

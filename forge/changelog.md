@@ -1,6 +1,3 @@
-### 1.2.0:
-* Fix to [#1](https://github.com/Christofmeg/AE2-QoL-Recipes/issues/1)
-* Made recipes more consistent
+Added 34 more recipes to convert Dense Covered Cables and Smart Dense Cables back to Covered Cables and Smart Cables
 
-### 1.1.2:
-* Change project structure
+Backported cable recipe ae2:network/cables/dense_smart_from_smart from 1.18+

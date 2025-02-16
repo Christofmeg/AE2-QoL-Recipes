@@ -90,9 +90,14 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
     apiToken = file('../../API Tokens/ae2qolrecipes.md')
     def projectId = "${cf_id}".toString()
     def mainFile = upload(projectId, file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
+
+    disableVersionDetection()
+    mainFile.addJavaVersion("Java " + "${java_version}")
+    mainFile.addModLoader("${project.name}")
+
     mainFile.changelogType = 'markdown'
     mainFile.changelog = file('changelog.md')
-    mainFile.addGameVersion('Client', 'Server')
+    mainFile.addGameVersion('Server')
     mainFile.releaseType = "${release_type}"
     "${forge_release_versions}".split(',').each {
         mainFile.addGameVersion("${it}")
@@ -103,12 +108,15 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
 
 modrinth {
     token = file('../../API Tokens/modrinth.md').text
-    projectId = "${modrinth_id}"
-    versionName = getArchivesBaseName() + "-" + getVersion()
-    versionType = "${release_type}"
+    projectId = modrinth_id
+    versionType = release_type
     changelog = file('changelog.md').text
-    uploadFile = file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar")
-    gameVersions = "${forge_release_versions}".split(",") as List<String>
+    gameVersions = forge_release_versions.split(",") as List<String>
+    loaders.add(project.name)
+    detectLoaders = false
+    versionName = "${archivesBaseName}-${version}"
+    uploadFile = layout.buildDirectory.file("libs/${archivesBaseName}-${version}.jar").get().asFile
+
     dependencies {
         required.project "ae2"
     }
